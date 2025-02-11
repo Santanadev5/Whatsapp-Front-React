@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Image from "./assets/foto.jpeg"
 import SendMessageIcon from "./assets/img-enviar.png"
@@ -7,14 +7,33 @@ import socket from "socket.io-client";
 const io = socket ('http://localhost:4000');
 
 function App() {
+  const [name, setName] = useState("");
+  const [joined, setJoined] = useState(false);
 
   useEffect (() => {
-    io.emit( 'join', 'um usuário entrou');
+    io.emit( "join", 'Nicolas');
   }, [])
+
+  const handleJoin =() => {
+    if(name) {
+      io.emit( "join", name);
+      setJoined(true);
+    }
+  }
+
+  if(!joined){
+    return(
+      <div>
+        <span>Digite seu nome</span>
+        <input value= {name} onChange={(e) => setName(e.target.value) }/>
+        <button onClick={() => handleJoin() }>Entrar</button>
+      </div>
+    )
+  }
 
 
   return (
-    <div className="container">
+    <div className='container'>
        <div className='back-ground'></div>
        <div className='chat-container'>
         
