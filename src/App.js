@@ -9,9 +9,10 @@ const io = socket ('http://localhost:4000');
 function App() {
   const [name, setName] = useState("");
   const [joined, setJoined] = useState(false);
+  const [users, setUsers] = useState([]);
 
   useEffect (() => {
-    io.emit( "join", 'Nicolas');
+    io.on("users", (users) => setUsers(users))
   }, [])
 
   const handleJoin =() => {
@@ -56,7 +57,11 @@ function App() {
               <img src={Image} className='image-profile' alt='' />
               <div className='title-chat-container'>
                 <span className='title-message'>Nicolas Santana </span>
-                <span className='last-message'></span>
+                <span className='last-message'>
+                  {users.map((user, index) =>(
+                    <span>{user.name}{index + 1 < users.length? ", " : ""}</span>
+                  ))}
+                </span>
               </div>
             </div>
           </div>
