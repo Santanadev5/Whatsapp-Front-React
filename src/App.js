@@ -1,85 +1,115 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Image from "./assets/foto.jpeg"
-import SendMessageIcon from "./assets/img-enviar.png"
-import socket from "socket.io-client";
+import Image from "./assets/foto.jpeg";
+import SendMessageIcon from "./assets/img-enviar.png";
+import { io } from "socket.io-client";
 
-const io = socket ('http://localhost:4000');
+const socket = io('http://localhost:4000');
 
 function App() {
   const [name, setName] = useState("");
   const [joined, setJoined] = useState(false);
   const [users, setUsers] = useState([]);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
-  useEffect (() => {
-    io.on("users", (users) => setUsers(users))
-  }, [])
+  useEffect(() => {
+    socket.on("users", (users) => setUsers(users));
 
-  const handleJoin =() => {
-    if(name) {
-      io.emit( "join", name);
+    socket.on("message", (message) => {
+      console.log("Nova mensagem recebida:", message); // Debug
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+
+    return () => {
+      socket.off("users");
+      socket.off("message");
+    };
+  }, []);
+
+  const handleJoin = () => {
+    if (name) {
+      socket.emit("join", name);
       setJoined(true);
     }
-  }
+  };
 
-  if(!joined){
-    return(
+  const handleMessage = () => {
+    if (message) {
+      socket.emit("message", { name, message });
+      setMessage("");
+    }
+  };
+
+  if (!joined) {
+    return (
       <div>
         <span>Digite seu nome</span>
-        <input value= {name} onChange={(e) => setName(e.target.value) }/>
-        <button onClick={() => handleJoin() }>Entrar</button>
+        <input value={name} onChange={(e) => setName(e.target.value)} />
+        <button onClick={handleJoin}>Entrar</button>
       </div>
-    )
+    );
   }
-
 
   return (
     <div className='container'>
-       <div className='back-ground'></div>
-       <div className='chat-container'>
-        
-          <div className='chat-contacts'>
-            <div className='chat-options'></div>
-            <div className='chat-item'>
-              <img src={Image} className='image-profile' alt='' />
-              <div className='title-chat-container'>
-                <span className='title-message'>Nicolas Santana </span>
-                <span className='last-message'> Nicolas: Olá</span>
-              </div>
+      <div className='back-ground'></div>
+      <div className='chat-container'>
+        <div className='chat-contacts'>
+          <div className='chat-options'></div>
+          <div className='chat-item'>
+            <img src={Image} className='image-profile' alt='' />
+            <div className='title-chat-container'>
+              <span className='title-message'>Grupo DEV</span>
+              <span className='last-message'>
+                 {messages.length? `${messages[messages.length - 1].name}: ${messages[messages.length - 1].message}` : ''}
+              </span>
             </div>
           </div>
-
-
+        </div>
 
         <div className='chat-messages'>
           <div className='chat-options'>
-           <div className='chat-item'>
+            <div className='chat-item'>
               <img src={Image} className='image-profile' alt='' />
               <div className='title-chat-container'>
-                <span className='title-message'>Nicolas Santana </span>
+                <span className='title-message'>Grupo DEV</span>
                 <span className='last-message'>
-                  {users.map((user, index) =>(
-                    <span>{user.name}{index + 1 < users.length? ", " : ""}</span>
+                  {users.map((user, index) => (
+                    <span key={index}>
+                      {user.name}
+                      {index + 1 < users.length ? ", " : ""}
+                    </span>
                   ))}
                 </span>
               </div>
             </div>
           </div>
 
-
           <div className='chat-messages-area'>
-
+            {messages.map((msg, index) => (
+              <span key={index} style={{ display: "block" }}>
+                {msg.name ? `${msg.name}: ` : " "} {msg.message}
+              </span>
+            ))}
           </div>
-
 
           <div className='chat-input-area'>
-            <input className='chat-input' placeholder='Mensagem'/>
-            <img src={SendMessageIcon} alt='' className='send-message-icon'/>
+            <input
+              className='chat-input'
+              placeholder='Mensagem'
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <img
+              src={SendMessageIcon}
+              alt=''
+              className='send-message-icon'
+              onClick={handleMessage}
+            />
           </div>
         </div>
-
-
-       </div>
+      </div>
     </div>
   );
 }
