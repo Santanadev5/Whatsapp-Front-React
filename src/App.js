@@ -46,12 +46,19 @@ function App() {
   if (!joined) {
     return (
       <div className="join-container">
-        <span>Digite seu nome</span>
-        <input value={name} onChange={(e) => setName(e.target.value)} />
-        <button onClick={handleJoin}>Entrar</button>
+        <div className="join-box">
+          <img src={Image} alt="Grupo" className="group-image" />
+          <h2>Insira seu nome para entrar no grupo</h2>
+          <input 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            placeholder="Digite seu nome"
+          />
+          <button onClick={handleJoin}>Entrar</button>
+        </div>
       </div>
     );
-  }
+  }  
 
   return (
     <div className='container'>
