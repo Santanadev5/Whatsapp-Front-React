@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Image from "./assets/foto.jpeg";
+import Image from "./assets/ft2.png";
 import SendMessageIcon from "./assets/img-enviar.png";
 import { io } from "socket.io-client";
+
+
 
 const socket = io('http://localhost:4000');
 
@@ -17,7 +19,7 @@ function App() {
     socket.on("users", (users) => setUsers(users));
 
     socket.on("message", (message) => {
-      console.log("Nova mensagem recebida:", message); // Debug
+      console.log("Nova mensagem recebida:", message); 
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
@@ -43,7 +45,7 @@ function App() {
 
   if (!joined) {
     return (
-      <div>
+      <div className="join-container">
         <span>Digite seu nome</span>
         <input value={name} onChange={(e) => setName(e.target.value)} />
         <button onClick={handleJoin}>Entrar</button>
@@ -62,7 +64,9 @@ function App() {
             <div className='title-chat-container'>
               <span className='title-message'>Grupo DEV</span>
               <span className='last-message'>
-                 {messages.length? `${messages[messages.length - 1].name}: ${messages[messages.length - 1].message}` : ''}
+                {messages.length
+                  ? `${messages[messages.length - 1].name}: ${messages[messages.length - 1].message}`
+                  : ''}
               </span>
             </div>
           </div>
@@ -88,9 +92,13 @@ function App() {
 
           <div className='chat-messages-area'>
             {messages.map((msg, index) => (
-              <span key={index} style={{ display: "block" }}>
-                {msg.name ? `${msg.name}: ` : " "} {msg.message}
-              </span>
+              <div 
+                key={index} 
+                className={`message ${msg.name === name ? 'sent' : 'received'}`}
+              >
+                <span className="message-name">{msg.name}</span>
+                <span className="message-text">{msg.message}</span>
+              </div>
             ))}
           </div>
 

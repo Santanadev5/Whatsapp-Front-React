@@ -15,7 +15,7 @@
   top: 0;
 }
 
-.chat-container{
+.chat-container {
   width: 95%;
   max-width: 1800px;
   height: 95%;
@@ -45,6 +45,7 @@
   flex-direction: column;
   margin-left: 15px;
 }
+
 .image-profile {
   width: 60px;
   height: auto;
@@ -67,16 +68,56 @@
 
 .chat-messages {
   flex: 1;
-  background-image: url('./assets/imagem-de-fundo-wpp.jpg');
+  background-image: url('./assets/Fundo-WhatsApp-novo.jpg');
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-repeat: no-repeat; /* Evita repetição da imagem */
+  background-size: cover;
 }
 
 .chat-messages-area {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 60%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+}
+
+.sent {
+  align-self: flex-end;
+  background-color: #DCF8C6;
+  color: #000;
+  border-radius: 10px 10px 0px 10px;
+}
+
+.received {
+  align-self: flex-start;
+  background-color: #F0F0F0;
+  color: #000;
+  border-radius: 10px 10px 10px 0px;
+}
+
+.message-name {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: #555;
+}
+
+.message-text {
+  word-wrap: break-word;
 }
 
 .chat-input-area {
@@ -106,4 +147,12 @@
   width: 40px;
   height: auto;
   cursor: pointer;
+}
+
+.join-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
