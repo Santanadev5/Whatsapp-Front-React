@@ -1,12 +1,14 @@
+/* Estilização principal do container */
 .container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #E2e1DE;
+  background-color: #E2E1DE;
 }
 
+/* Fundo superior */
 .back-ground {
   background-color: #00A884;
   height: 20%;
@@ -15,6 +17,7 @@
   top: 0;
 }
 
+/* Contêiner principal do chat */
 .chat-container {
   width: 95%;
   max-width: 1800px;
@@ -28,16 +31,27 @@
   width: 30%;
   height: 100%;
   border-right: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite rolagem */
+  padding: 0px 0;
 }
 
 .chat-item {
   box-sizing: border-box;
-  padding: 10px;
+  padding: 15px;
   border-top: 1px solid #f0f2f5;
   border-bottom: 1px solid #f0f2f5;
   display: flex;
   align-items: center;
   cursor: pointer;
+  background-color: white;
+  transition: background 0.2s ease-in-out;
+  margin-bottom: 5px; 
+}
+
+.chat-item:hover {
+  background-color: #f5f5f5;
 }
 
 .title-chat-container {
@@ -47,35 +61,100 @@
 }
 
 .image-profile {
-  width: 60px;
-  height: auto;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .title-message {
   font-size: 18px;
+  font-weight: bold;
+  color: #333;
 }
 
 .last-message {
   color: #808080;
 }
 
-.chat-options {
-  width: 100%;
-  height: 80px;
+.chat-header {
+  display: flex;
+  flex-direction: column; /* Garante que os elementos fiquem em colunas */
+  gap: 10px; /* Espaço entre os elementos */
+  padding: 15px;
   background-color: #f0f2f5;
+  border-bottom: 1px solid #e6e6e6;
 }
 
+.chat-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.chat-header-title h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.chat-header h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  
+}
+
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 95%; 
+  background: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+
+.search-bar .search-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.search-bar input {
+  flex: 1; 
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* Ícones do cabeçalho */
+.chat-header-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-header-icons .icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* Área de mensagens */
 .chat-messages {
   flex: 1;
   background-image: url('./assets/Fundo-WhatsApp-novo.jpg');
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-repeat: no-repeat; /* Evita repetição da imagem */
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
+/* Conteúdo das mensagens */
 .chat-messages-area {
   flex: 1;
   display: flex;
@@ -84,6 +163,7 @@
   overflow-y: auto;
 }
 
+/* Mensagens enviadas e recebidas */
 .message {
   max-width: 60%;
   padding: 10px;
@@ -120,6 +200,7 @@
   word-wrap: break-word;
 }
 
+/* Área de entrada de mensagem */
 .chat-input-area {
   width: 100%;
   height: 70px;
@@ -143,12 +224,14 @@
   font-size: 16px;
 }
 
+/* Ícone de envio */
 .send-message-icon {
   width: 40px;
   height: auto;
   cursor: pointer;
 }
 
+/* Tela de login */
 .join-container {
   height: 100vh;
   display: flex;
@@ -198,9 +281,11 @@
   background-color: #1EBE5D;
 }
 
+/* Imagem do grupo */
 .group-image {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   margin-bottom: 15px;
 }
+

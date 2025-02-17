@@ -3,7 +3,9 @@ import './App.css';
 import Image from "./assets/ft2.png";
 import SendMessageIcon from "./assets/img-enviar.png";
 import { io } from "socket.io-client";
-
+import MenuIcon from "./assets/pontinhos.png";
+import NewChatIcon from "./assets/nova-conversa.png";
+import SearchIcon from "./assets/lupa.png";
 
 
 const socket = io('http://localhost:4000');
@@ -65,7 +67,24 @@ function App() {
       <div className='back-ground'></div>
       <div className='chat-container'>
         <div className='chat-contacts'>
-          <div className='chat-options'></div>
+          <div className='chat-options'>
+          <div className="chat-header">
+        
+            <div className="chat-header-top">
+              <h2 className="chat-header-title">Conversas</h2>
+              <div className="chat-header-icons">
+                <img src={NewChatIcon} alt="Nova Conversa" className="icon" />
+                <img src={MenuIcon} alt="Mais Opções" className="icon" />
+              </div>
+            </div>
+            <div className="search-bar">
+              <img src={SearchIcon} alt="Pesquisar" className="search-icon" />
+              <input type="text" placeholder="Pesquisar" />
+            </div>
+          </div>
+
+
+          </div>
           <div className='chat-item'>
             <img src={Image} className='image-profile' alt='' />
             <div className='title-chat-container'>
