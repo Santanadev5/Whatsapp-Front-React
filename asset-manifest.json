@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Whatsapp-Front-React/static/css/main.46af1ed1.css",
+    "main.js": "/Whatsapp-Front-React/static/js/main.f2e3a8e8.js",
+    "static/media/Fundo-WhatsApp-novo.jpg": "/Whatsapp-Front-React/static/media/Fundo-WhatsApp-novo.0b944f03ded4cc685536.jpg",
+    "static/media/lupa.png": "/Whatsapp-Front-React/static/media/lupa.9bf25bb4121f078836e7.png",
+    "index.html": "/Whatsapp-Front-React/index.html",
+    "main.46af1ed1.css.map": "/Whatsapp-Front-React/static/css/main.46af1ed1.css.map",
+    "main.f2e3a8e8.js.map": "/Whatsapp-Front-React/static/js/main.f2e3a8e8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46af1ed1.css",
+    "static/js/main.f2e3a8e8.js"
+  ]
+}
